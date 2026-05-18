@@ -2,11 +2,13 @@ const express = require("express");
 const connectDB = require("./config/db");
 const envObj = require("./config/env");
 const productRoute = require("./routes/product");
+const authRoute = require("./routes/auth");
 
 const server = express();
 server.use(express.json());
 
 server.use("/api/v1/product", productRoute);
+server.use("/api/v1/auth", authRoute);
 
 server.get("/", (req, res) => {
   res.send("hello welcome to our server");
