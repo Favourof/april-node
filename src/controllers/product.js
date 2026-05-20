@@ -1,6 +1,8 @@
 const Product = require("../models/product");
 
 const createProduct = async (req, res) => {
+  console.log(req.user, "from create product function");
+
   try {
     const { title, description, price } = req.body;
     console.log(req.body);

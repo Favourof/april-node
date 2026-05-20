@@ -1,6 +1,7 @@
 const envObj = require("../config/env");
 const User = require("../models/auth");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const registerUser = async (req, res) => {
   try {
     // user input
@@ -92,9 +93,14 @@ const loginUser = async (req, res) => {
       gender: existingUser.gender,
     };
 
+    const token = jwt.sign({ userID: existingUser._id }, envObj.jwt_secret, {
+      expiresIn: envObj.jwt_expireIn,
+    });
+    console.log("token:", token);
+
     return res
       .status(200)
-      .json({ status: true, message: "login Successfully", user });
+      .json({ status: true, message: "login Successfully", user, token });
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ status: true, message: error.message });
