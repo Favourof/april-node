@@ -29,7 +29,12 @@ const userSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ["male" | "female"],
+    enum: ["male", "female"],
+  },
+  role: {
+    type: String,
+    enum: ["admin", "user"],
+    default: "user",
   },
 });
 

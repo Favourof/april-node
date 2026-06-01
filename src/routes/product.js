@@ -13,6 +13,6 @@ const route = express.Router();
 route.post("/", tokenVerification, createProduct);
 route.get("/", getAllProduct);
 route.post("/:id", getSingleProduct);
-route.delete("/:id", deleteProduct);
+route.delete("/:id", tokenVerification, deleteProduct);
 route.put("/:id", updateProduct);
 module.exports = route;

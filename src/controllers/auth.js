@@ -93,9 +93,13 @@ const loginUser = async (req, res) => {
       gender: existingUser.gender,
     };
 
-    const token = jwt.sign({ userID: existingUser._id }, envObj.jwt_secret, {
-      expiresIn: envObj.jwt_expireIn,
-    });
+    const token = jwt.sign(
+      { userID: existingUser._id, role: existingUser.role },
+      envObj.jwt_secret,
+      {
+        expiresIn: envObj.jwt_expireIn,
+      },
+    );
     console.log("token:", token);
 
     return res

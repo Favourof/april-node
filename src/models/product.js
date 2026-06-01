@@ -28,6 +28,10 @@ const productSchema = new mongoose.Schema({
   category: {
     type: String,
   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
 });
 
 module.exports = mongoose.model("product", productSchema);

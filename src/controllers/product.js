@@ -1,9 +1,13 @@
 const Product = require("../models/product");
+const User = require("../models/auth");
 
 const createProduct = async (req, res) => {
   console.log(req.user, "from create product function");
 
   try {
+    if (req.user.role !== "admin") {
+      return res.status(401).json({ status: false, message: "Access Denied" });
+    }
     const { title, description, price } = req.body;
     console.log(req.body);
 
@@ -12,8 +16,12 @@ const createProduct = async (req, res) => {
         .status(400)
         .json({ status: false, message: "All field is required" });
     }
+    const user = await User.find();
 
-    const product = await Product.create(req.body);
+    const product = await Product.create({
+      ...req.body,
+      userId: req.user.userID,
+    });
 
     return res.status(201).json({
       status: true,
@@ -73,14 +81,26 @@ const getSingleProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
+    if (req.user.role !== "admin") {
+      return res.status(401).json({ status: false, message: "Access Denied" });
+    }
+
     const { id } = req.params;
-    const product = await Product.findByIdAndDelete(id);
+    const product = await Product.findById(id);
+    // const product = await Product.findByIdAndDelete(id);
 
     if (!product) {
       return res
         .status(404)
         .json({ status: false, message: "Product not Found" });
     }
+    console.log(product.userId.toString(), "from product");
+    console.log(req.user.userID, "from token");
+    if (product.userId.toString() !== req.user.userID) {
+      return res.status(401).json({ status: false, message: "Access Denied" });
+    }
+
+    await Product.deleteOne({ _id: id });
 
     return res.status(200).json({
       status: true,
