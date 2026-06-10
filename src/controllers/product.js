@@ -1,8 +1,11 @@
 const Product = require("../models/product");
 const User = require("../models/auth");
+const { cloudinary } = require("../config/cloudinary");
 
 const createProduct = async (req, res) => {
   console.log(req.user, "from create product function");
+
+  console.log(req.file);
 
   try {
     if (req.user.role !== "admin") {
@@ -11,24 +14,40 @@ const createProduct = async (req, res) => {
     const { title, description, price } = req.body;
     console.log(req.body);
 
-    if (!title || !description || !price) {
+    if (!title || !description || !price || !req.file) {
       return res
         .status(400)
         .json({ status: false, message: "All field is required" });
     }
     const user = await User.find();
 
-    const product = await Product.create({
-      ...req.body,
-      userId: req.user.userID,
-    });
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "april-Product" },
 
-    return res.status(201).json({
-      status: true,
-      message: "PRoduct create Successfully",
-      product: product,
-      length: product.length,
-    });
+      async (error, result) => {
+        if (error) {
+          console.log(error);
+
+          return res.status(500).json({ message: "Cloudinary upload failed" });
+        }
+        console.log(result, "from cloudinary");
+        const product = {
+          ...req.body,
+          image: result.secure_url,
+          imageId: result.public_id,
+        };
+
+        await Product.create(product);
+
+        if (product) {
+          return res
+            .status(201)
+            .json({ message: "product created Successfully", product });
+        }
+      },
+    );
+
+    stream.end(req.file.buffer);
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ status: false, message: error.message });
