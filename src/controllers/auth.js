@@ -3,6 +3,7 @@ const envObj = require("../config/env");
 const User = require("../models/auth");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { sendWelcomingEmail } = require("../utils/mailer");
 
 //  Register user
 const registerUser = async (req, res) => {
@@ -53,6 +54,8 @@ const registerUser = async (req, res) => {
       name,
       gender,
     };
+
+    sendWelcomingEmail(email, name);
 
     // Returning a successful message to users
     return res

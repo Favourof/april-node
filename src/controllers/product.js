@@ -11,6 +11,7 @@ const createProduct = async (req, res) => {
     if (req.user.role !== "admin") {
       return res.status(401).json({ status: false, message: "Access Denied" });
     }
+
     const { title, description, price } = req.body;
     console.log(req.body);
 
