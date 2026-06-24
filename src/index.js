@@ -27,5 +27,5 @@ connectDB();
 testTransporter();
 
 server.listen(port, () => {
-  console.log("April node server is ruining on port 4000");
+  console.log(`April node server is ruining on port ${envObj.port}`);
 });
