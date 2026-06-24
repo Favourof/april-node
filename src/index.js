@@ -12,9 +12,7 @@ const {
 
 const server = express();
 server.use(express.json());
-server.use(
-  cors({ origin: ["http://localhost:5173", "http://localhost:5484"] }),
-);
+server.use(cors({ origin: [envObj.base_url] }));
 
 server.use("/api/v1/product", productRoute);
 server.use("/api/v1/auth", authRoute);
