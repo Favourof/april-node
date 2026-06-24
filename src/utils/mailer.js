@@ -13,8 +13,6 @@ const transporter = nodeMailer.createTransport({
 });
 
 const testTransporter = async () => {
-  console.log(envObj.app_email, envObj.app_password);
-
   try {
     await transporter.verify();
     console.log("Server is ready to take our messages");
