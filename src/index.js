@@ -24,7 +24,7 @@ server.get("/", (req, res) => {
 const port = envObj.port;
 
 connectDB();
-testTransporter();
+// testTransporter();
 
 server.listen(port, () => {
   console.log(`April node server is ruining on port ${envObj.port}`);
