@@ -1,0 +1,352 @@
+{
+  "info": {
+    "_postman_id": "d6553f2f-f3c0-4a78-becc-6fa349de6c6e",
+    "name": "node",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33609178",
+    "_collection_link": "https://go.postman.co/collection/33609178-d6553f2f-f3c0-4a78-becc-6fa349de6c6e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Product",
+      "item": [
+        {
+          "name": "check Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000 ",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000 "
+            },
+            "description": "Checks whether the API server is up and running. Returns a simple health status response. Use this endpoint to verify the server is reachable before making other requests."
+          },
+          "response": []
+        },
+        {
+          "name": "Get all product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/api/v1/product",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "product"
+              ]
+            },
+            "description": "Retrieves a list of all products available in the system. Returns an array of product objects."
+          },
+          "response": []
+        },
+        {
+          "name": "Add product",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "The Golf PAcket",
+                  "type": "text"
+                },
+                {
+                  "key": "price",
+                  "value": "400",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "this is a Shoe",
+                  "type": "text"
+                },
+                {
+                  "key": "category",
+                  "value": "Asscdhhr",
+                  "type": "text"
+                },
+                {
+                  "key": "currency",
+                  "value": "USD",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "6db0f45d-591b-451c-a700-c99759371852",
+                  "src": "/C:/Users/user/Downloads/download (19).jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/v1/product",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "product"
+              ]
+            },
+            "description": "Creates a new product. Send a JSON body with the product details (e.g. name, price, description, category). Requires authentication — include a valid Bearer token in the Authorization header. On success, returns the newly created product object."
+          },
+          "response": []
+        },
+        {
+          "name": "get single product",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/v1/product/6a1d4085314aac63d50e6552",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "product",
+                "6a1d4085314aac63d50e6552"
+              ]
+            },
+            "description": "Fetches the details of a single product by its unique ID. Replace the product ID in the URL path with the target product's ID. Returns the full product object if found, or a 404 error if the product does not exist."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/api/v1/product/6a1d4085314aac63d50e6552",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "product",
+                "6a1d4085314aac63d50e6552"
+              ]
+            },
+            "description": "Deletes a product by its unique ID. Replace the product ID in the URL path with the ID of the product to be removed. Requires authentication — include a valid Bearer token in the Authorization header. Returns a success message on deletion or a 404 error if the product is not found."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"The Bag\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/v1/product/6a27e6b13068c40289cca87b",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "product",
+                "6a27e6b13068c40289cca87b"
+              ]
+            },
+            "description": "Updates the details of an existing product by its unique ID. Replace the product ID in the URL path with the target product's ID. Send a JSON body with the fields to update (e.g. name, price, description). Requires authentication — include a valid Bearer token in the Authorization header. Returns the updated product object on success."
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{token}}",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();\r",
+                  "const token = response.token || response.accessToken || response.access_token || (response.data && (response.data.token || response.data.accessToken || response.data.access_token));\r",
+                  "\r",
+                  "if (token) {\r",
+                  "    pm.environment.set(\"token\", token);\r",
+                  "    console.log(\"Token saved:\", token);\r",
+                  "} else {\r",
+                  "    console.log(\"Token not found in response:\", JSON.stringify(response));\r",
+                  "}\r",
+                  "\r",
+                  "pm.test(\"Token extracted and saved\", function () {\r",
+                  "    pm.expect(token).to.not.be.undefined;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \r\n    \"email\": \"eayodej06@gmail.com\",\r\n    \"name\": \"Bola\",\r\n    \"password\": \"Aprolclass4#\"\r\n\r\n\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base-url}}/auth/register",
+              "host": [
+                "{{base-url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Registers a new user account. Send a JSON body with the required user details (e.g. name, email, password). On success, returns the newly created user object along with an authentication token."
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const response = pm.response.json();",
+                  "const token = response.token || response.accessToken || response.access_token || (response.data && (response.data.token || response.data.accessToken || response.data.access_token));",
+                  "",
+                  "if (token) {",
+                  "    pm.environment.set(\"token\", token);",
+                  "    console.log(\"Token saved:\", token);",
+                  "} else {",
+                  "    console.log(\"Token not found in response:\", JSON.stringify(response));",
+                  "}",
+                  "",
+                  "pm.test(\"Token extracted and saved\", function () {",
+                  "    pm.expect(token).to.not.be.undefined;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Authenticates an existing user. Send a JSON body with the user's email and password. On success, returns a JWT token that should be stored and used as a Bearer token in the Authorization header for protected endpoints."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

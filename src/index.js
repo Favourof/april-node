@@ -21,6 +21,16 @@ server.get("/", (req, res) => {
   res.send("hello welcome to our server");
 });
 
+server.use((req, res) => {
+  res.status(404).send({
+    message: "Route not found",
+    api: {
+      product: "/api/v1/product",
+      auth: "/api/v1/auth",
+    },
+  });
+});
+
 const port = envObj.port;
 
 connectDB();

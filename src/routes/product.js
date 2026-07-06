@@ -13,7 +13,7 @@ const route = express.Router();
 
 route.post("/", tokenVerification, upload.single("image"), createProduct);
 route.get("/", getAllProduct);
-route.post("/:id", getSingleProduct);
+route.get("/:id", getSingleProduct);
 route.delete("/:id", tokenVerification, deleteProduct);
 route.put("/:id", updateProduct);
 module.exports = route;

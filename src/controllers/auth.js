@@ -124,4 +124,26 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+const getCurrentUser = async (req, res) => {
+  try {
+    // user input
+    const user = await User.findById(req.user.userID);
+
+    if (!user) {
+      return res.status(400).json({ status: false, message: "user not found" });
+    }
+
+    const userObj = {
+      name: user.name,
+      email: user.email,
+      gender: user.gender,
+      role: user.role,
+    };
+    return res.status(200).json({ status: true, userObj });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({ status: true, message: error.message });
+  }
+};
+
+module.exports = { registerUser, loginUser, getCurrentUser };
